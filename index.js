@@ -9,7 +9,7 @@ app.use( express.json() );
 admin.initializeApp( {
   credential: admin.credential.cert( serviceAccount )
 } );
-app.post('/',(req,res)=>{
+app.get('/',(req,res)=>{
 
   res.send('hello'
 })
