@@ -9,21 +9,10 @@ app.use( express.json() );
 admin.initializeApp( {
   credential: admin.credential.cert( serviceAccount )
 } );
-// const message = {
-//   notification: {
-//     title: 'Hello World',
-//     body: 'This is a notification that will be displayed ASAP.'
-//   },
-//   token: tokenUser
+app.post('/',(req,res)=>{
 
-// };
-// admin.messaging().send( message ).then( ( result ) => {
-//   console.log( '====================================' );
-//   console.log( { result } );
-//   console.log( '====================================' );
-// } ).catch( ( err ) => {
-
-// } );
+  res.send('hello'
+})
 app.post( '/send', ( req, res ) => {
   console.log( '== req.body==============================' );
   console.log( req.body );
