@@ -12,11 +12,11 @@ admin.initializeApp( {
 const db = admin.firestore();
 const collectionRef = db.collection('Cross-Tech');
 
-app.get('/',(req,res)=>{
+app.get('/api',(req,res)=>{
 
   res.send('hello')
 })
-app.post( '/send', ( req, res ) => {
+app.post( '/api/send', ( req, res ) => {
   console.log( '== req.body==============================' );
   console.log( req.body );
   console.log( '== req.date==============================' );
@@ -43,7 +43,7 @@ app.post( '/send', ( req, res ) => {
 
   } );
 } );
-app.get( '/:tokenId', ( req, res ) => {
+app.get( '/api/:tokenId', ( req, res ) => {
   const query = collectionRef.where('tokenId', '==', req.params?.tokenId );
   query.get()
   .then((querySnapshot) => {
