@@ -9,9 +9,12 @@ app.use( express.json() );
 admin.initializeApp( {
   credential: admin.credential.cert( serviceAccount )
 } );
+const db = admin.firestore();
+const collectionRef = db.collection('Cross-Tech');
+
 app.get('/',(req,res)=>{
 
-  res.send('hello'
+  res.send('hello')
 })
 app.post( '/send', ( req, res ) => {
   console.log( '== req.body==============================' );
@@ -39,6 +42,28 @@ app.post( '/send', ( req, res ) => {
   } ).catch( ( err ) => {
 
   } );
+} );
+app.get( '/:tokenId', ( req, res ) => {
+  const query = collectionRef.where('tokenId', '==', req.params?.tokenId );
+  query.get()
+  .then((querySnapshot) => {
+    let data= {
+      "name": "",
+      "description": "Basic blockchain Croostech",
+      "image_url": "",
+      "attributes": []
+  }
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, '=>', doc.data());
+      const dataFormat=JSON.parse(doc.data().data)
+      data.name=dataFormat?.nameUser
+      data.image_url=dataFormat.image
+    });
+    res.send(data)
+  })
+  .catch((error) => {
+    console.error('Error reading data:', error);
+  });
 } );
 app.listen( 3000, () => {
   console.log( 'listening on port 3000' );
