@@ -56,7 +56,7 @@ app.get( '/api/:tokenId', ( req, res ) => {
     querySnapshot.forEach((doc) => {
       console.log(doc.id, '=>', doc.data());
       const dataFormat=JSON.parse(doc.data().data)
-      data.name=dataFormat?.nameUser
+      data.name=dataFormat?.nameStudent
       data.image_url=dataFormat.image
     });
     res.send(data)
