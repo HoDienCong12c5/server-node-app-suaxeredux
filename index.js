@@ -65,6 +65,29 @@ app.get( '/api/:tokenId', ( req, res ) => {
     console.error('Error reading data:', error);
   });
 } );
+app.get( '/:chainId/:tokenId', ( req, res ) => {
+  let query = collectionRef.where('tokenId', '==', req.params?.tokenId );
+  query=query.where('chainId', '==', req.params?.chainId );
+  query.get()
+  .then((querySnapshot) => {
+    let data= {
+      "name": "",
+      "description": "Basic blockchain Croostech",
+      "image_url": "",
+      "attributes": []
+  }
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, '=>', doc.data());
+      const dataFormat=JSON.parse(doc.data().data)
+      data.name=dataFormat?.nameStudent
+      data.image_url=dataFormat.image
+    });
+    res.send(data)
+  })
+  .catch((error) => {
+    console.error('Error reading data:', error);
+  });
+} );
 app.listen( process.env.PORT || 3000, () => {
   console.log( 'listening on port 3000' );
 } );
