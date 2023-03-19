@@ -81,6 +81,7 @@ app.get( '/:chainId/:tokenId', ( req, res ) => {
       const dataFormat=JSON.parse(doc.data().data)
       data.name=dataFormat?.nameStudent
       data.image_url=dataFormat.image
+      data.data=dataFormat
     });
     res.send(data)
   })
