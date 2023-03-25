@@ -90,7 +90,7 @@ app.get( '/:chainId/:tokenId', ( req, res ) => {
     console.error('Error reading data:', error);
   });
 } );
-app.post( 'auth/:address', ( req, res ) => {
+app.post( '/auth/:address', ( req, res ) => {
   const address =req.params?.address
   let datNow = new Date(Date.now())
 
@@ -116,7 +116,7 @@ app.post( 'auth/:address', ( req, res ) => {
     accessToken
   })
 } );
-app.post( 'check-auth/:address', ( req, res ) => {
+app.post( '/check-auth/:address', ( req, res ) => {
   const address =req.params?.address
   const auth =req.headers.authorization
   const accessToken=jwt.verify(auth,'thanhCong');
