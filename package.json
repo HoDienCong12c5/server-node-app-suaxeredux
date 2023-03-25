@@ -5,14 +5,17 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index"
+    "start": "nodemon index"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.3",
     "firebase-admin": "^10.0.2",
     "jsonwebtoken": "^9.0.0",
-    "ngrok": "^4.3.0"
+    "jwt-decode": "^3.1.2",
+    "ngrok": "^4.3.0",
+    "nodemon": "^2.0.22"
   }
 }
