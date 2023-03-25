@@ -1,5 +1,6 @@
 const admin = require( 'firebase-admin' );
 const express = require( 'express' );
+var jwt = require('jsonwebtoken');
 const serviceAccount = require( './bth4-d5049-firebase-adminsdk-5z1j5-71aaa39e73.json' );
 
 const app = express();
@@ -89,6 +90,47 @@ app.get( '/:chainId/:tokenId', ( req, res ) => {
     console.error('Error reading data:', error);
   });
 } );
+app.post( 'auth/:address', ( req, res ) => {
+  const address =req.params?.address
+  let datNow = new Date(Date.now())
+
+  const expiredRefreshToken=datNow.setDate(datNow.getDate() + 15)
+  const expiredAccessToken=datNow.setDate(datNow.getDate() + 1)
+  let refreshToken ={
+    address,
+    dateTime: new Date(Date.now()),
+    server:'mlemShop',
+    expired:expiredRefreshToken
+  }
+  let accessToken ={
+    address,
+    dateTime: new Date(Date.now()),
+    server:'mlemShop',
+    expired:expiredAccessToken
+  }
+
+  refreshToken = jwt.sign(refreshToken,'thanhCong');
+  accessToken = jwt.sign(refreshToken,'thanhCong');
+  res.send({
+    refreshToken,
+    accessToken
+  })
+} );
+app.post( 'check-auth/:address', ( req, res ) => {
+  const address =req.params?.address
+  const auth =req.headers.authorization
+  const accessToken=jwt.verify(auth,'thanhCong');
+  if(address===accessToken?.address){
+    res.send(accessToken)
+  }else{
+    res.send({
+      status:500,
+      accessToken
+    })
+
+  }
+} );
+
 app.listen( process.env.PORT || 3000, () => {
   console.log( 'listening on port 3000' );
 } );

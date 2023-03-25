@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node index"
+    "start": "node index"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.3",
     "firebase-admin": "^10.0.2",
+    "jsonwebtoken": "^9.0.0",
     "ngrok": "^4.3.0"
   }
 }
