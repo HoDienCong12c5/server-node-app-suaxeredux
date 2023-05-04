@@ -22,8 +22,8 @@ const collectionRef = db.collection("Cross-Tech");
 app.get("/api", (req, res) => {
   res.send("hello");
 });
-app.get("/version", (req, res) => {
-  res.send(1);
+app.get("/version-unity", (req, res) => {
+  res.send('1');
 });
 app.post("/api/send", (req, res) => {
   console.log("== req.body==============================");
