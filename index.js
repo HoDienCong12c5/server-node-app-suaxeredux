@@ -7,7 +7,7 @@ const jwt_decode = require("jwt-decode");
 const { parseJwt, calculateDayNow } = require("./function");
 const mySecret='thanhcong'
 const app = express();
-let versionWeb='1.0.2'
+let versionWeb=1
 // 👇️ configure CORS
 app.use(cors());
 // app.use( express.json() );
@@ -23,7 +23,8 @@ app.get("/api", (req, res) => {
   res.send("hello");
 });
 app.get("/version-unity", (req, res) => {
-  res.send(versionWeb);
+  versionWeb++
+  res.send(`1.1.${versionWeb}`);
 });
 app.post("/api/send", (req, res) => {
   console.log("== req.body==============================");
@@ -54,8 +55,10 @@ app.post("/api/send", (req, res) => {
     .catch((err) => {});
 });
 app.get("/version/:version", (req, res) => {
-  versionWeb=req.params?.version
-  res.send(versionWeb);
+  if(req.params?.version){
+    versionWeb=Number(req.params?.version)
+  }
+  res.send(`1.1.${versionWeb}`);
 });
 app.get("/api/:tokenId", (req, res) => {
   const query = collectionRef.where("tokenId", "==", req.params?.tokenId);
