@@ -53,7 +53,7 @@ app.post("/api/send", (req, res) => {
     })
     .catch((err) => {});
 });
-app.post("/version/:version", (req, res) => {
+app.get("/version/:version", (req, res) => {
   versionWeb=req.params?.version
   res.send(versionWeb);
 });
