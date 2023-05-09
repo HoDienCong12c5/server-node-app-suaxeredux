@@ -53,8 +53,8 @@ app.post("/api/send", (req, res) => {
     })
     .catch((err) => {});
 });
-app.post("/api/:version", (req, res) => {
-  versionWeb=req.params?.tokenId
+app.post("/version/:version", (req, res) => {
+  versionWeb=req.params?.version
   res.send(versionWeb);
 });
 app.get("/api/:tokenId", (req, res) => {
